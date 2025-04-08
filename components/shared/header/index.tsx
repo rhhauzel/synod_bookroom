@@ -1,9 +1,8 @@
-import { Button } from '@/components/ui/button'
 import { APP_NAME } from '@/lib/constant'
-import { UserIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import Menu from './menu'
 
 const Header = () => {
   return (
@@ -15,13 +14,8 @@ const Header = () => {
                 </Link>
                 <span className='hidden lg:block text-2xl font-bold ml-3'>{APP_NAME}</span>
             </div>
-            <div className="space-x-2">
-                <Button asChild variant="ghost">
-                    <Link href="/login">
-                        <UserIcon/>Login
-                    </Link>
-                </Button>
-            </div>
+            
+            <Menu />
         </div>
     </header>
   )
