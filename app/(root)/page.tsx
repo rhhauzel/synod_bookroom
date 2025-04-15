@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 const delay = (ms:number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const Home = async () => {
-  await delay(5000);
+  await delay(1000);
   return (
     <div>
       Home
