@@ -4,7 +4,6 @@ import React from 'react'
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
@@ -17,15 +16,20 @@ import {
   import { PastorBialInterface } from '@/db/interface/pastorbial'
 
   import { useRouter } from 'next/navigation'
+import { PresbyteryInterface } from '@/db/interface/presbytery'
+import { Button } from '@/components/ui/button'
+import { Pencil, Trash2 } from 'lucide-react'
 
 
 const PastorBial = ({params,}:{params:Promise<{presid: string}>}) => {
     const [pastorbial, setPastorBial] = useState<PastorBialInterface[]>([])
+    const [presbytery, setPresbytery] = useState<PresbyteryInterface[]>([])
 
     const router = useRouter()
 
     useEffect(() => {
         fetchPastorBial()
+        fetchSinglePresbytery()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
@@ -48,28 +52,39 @@ const PastorBial = ({params,}:{params:Promise<{presid: string}>}) => {
       router.push(`/admin/presbytery/${bialcode}/${id}`)
     }
 
+    async function fetchSinglePresbytery(){
+      const presID = (await params).presid
+      const { data, error } = await supabase.from('tm_presbytery').select("*").eq('pres_code', presID)
+
+      if(error){
+        toast.error(`Failed to fetch data ${error.message}`)
+      }else{
+        setPresbytery(data || '')
+      }
+    }
+
   return (
     <div>
-        Pastor Bial
+        { presbytery.at(0)?.pres_name} Pastor Bial
         <Table>
-        <TableCaption>A list of Pastor Bial..</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className='w-[100px]'>Pres Code</TableHead>
-            <TableHead>Pres Name</TableHead>
-            <TableHead>Bial Code</TableHead>
-            <TableHead>Bial Name</TableHead>
-            <TableHead className='text-right'>Remarks</TableHead>
+            <TableHead className='w-[100px]'>Bial Code</TableHead>
+            <TableHead>Bial Hming</TableHead>
+            <TableHead className='text-center'>Remarks</TableHead>
+            <TableHead className='w-[100px] text-center'>Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {pastorbial.map((singleData) => (
             <TableRow key={singleData.id} onClick={() => {hadleClick(singleData.pres_code,singleData.bial_code)}}>
-              <TableCell className='font-medium'>{singleData.pres_code}</TableCell>
-              <TableCell>{singleData.pres_name}</TableCell>
-              <TableCell>{singleData.bial_code}</TableCell>
+              <TableCell className='font-medium'>{singleData.bial_code}</TableCell>
               <TableCell>{singleData.bial_name}</TableCell>
               <TableCell className='text-right'>{ singleData.remarks }</TableCell>
+              <TableCell className='text-center'>
+                <Button variant='outline' size={'sm'} className='mr-1'><Pencil/></Button>
+                <Button variant='destructive' size={'sm'} className='ml-1'><Trash2/></Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

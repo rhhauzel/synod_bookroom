@@ -1,8 +1,6 @@
 import React from 'react'
 import { ModeToggle } from './mode-toggle'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import { EllipsisVertical, UserIcon } from 'lucide-react'
+import { EllipsisVertical } from 'lucide-react'
 import {
   Sheet,
   SheetContent,
@@ -18,12 +16,12 @@ const Menu = () => {
       <nav className='hidden md:flex w-full max-w-xs gap-1'>
         <ModeToggle />
 
-        <Button asChild>
+        {/* <Button asChild>
           <Link href='/login'>
             <UserIcon />
             Login
           </Link>
-        </Button>
+        </Button> */}
       </nav>
       <nav className='md:hidden'>
         <Sheet>
@@ -37,14 +35,14 @@ const Menu = () => {
             </SheetHeader>
             <ModeToggle />
 
-            <div className='flex flex-col items-start space-y-2'>
+            {/* <div className='flex flex-col items-start space-y-2'>
               <Button asChild className='justify-start'>
                 <Link href='/login'>
                   <UserIcon />
                   Login
                 </Link>
               </Button>
-            </div>
+            </div> */}
           </SheetContent>
         </Sheet>
       </nav>
