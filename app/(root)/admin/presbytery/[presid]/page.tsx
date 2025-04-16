@@ -1,5 +1,4 @@
 'use client'
-
 import React from 'react'
 
 import {
@@ -17,23 +16,38 @@ import {
   import toast from 'react-hot-toast'
   import { PastorBialInterface } from '@/db/interface/pastorbial'
 
-const PastorBial = () => {
+  import { useRouter } from 'next/navigation'
+
+
+const PastorBial = ({params,}:{params:Promise<{presid: string}>}) => {
     const [pastorbial, setPastorBial] = useState<PastorBialInterface[]>([])
+
+    const router = useRouter()
 
     useEffect(() => {
         fetchPastorBial()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     // Fetch Minor Head Data
     async function fetchPastorBial() {
-        const { data, error } = await supabase.from('tm_pastor_bial').select('*')
-
+      const presId = (await params).presid
+        const { data, error } = await supabase.from('tm_pastor_bial').select('*').filter('pres_code', 'eq', presId)
+        
         if(error){
             toast.error(`Failed to fetch data ${error.message}`)
         }else{
+          event?.preventDefault()
             setPastorBial(data || [])
         }
     }
+
+    // Click Event
+    const hadleClick = (bialcode: string, id: string) => {
+      //e.preventDefault()
+      router.push(`/admin/presbytery/${bialcode}/${id}`)
+    }
+
   return (
     <div>
         Pastor Bial
@@ -50,7 +64,7 @@ const PastorBial = () => {
         </TableHeader>
         <TableBody>
           {pastorbial.map((singleData) => (
-            <TableRow key={singleData.id}>
+            <TableRow key={singleData.id} onClick={() => {hadleClick(singleData.pres_code,singleData.bial_code)}}>
               <TableCell className='font-medium'>{singleData.pres_code}</TableCell>
               <TableCell>{singleData.pres_name}</TableCell>
               <TableCell>{singleData.bial_code}</TableCell>

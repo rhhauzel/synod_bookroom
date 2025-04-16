@@ -17,8 +17,11 @@ import {
   import toast from 'react-hot-toast'
   import { PresbyteryInterface } from '@/db/interface/presbytery'
 
+  import { useRouter } from 'next/navigation'
+
 const Presbytery = () => {
     const [presbytery, setPresbytery] = useState<PresbyteryInterface[]>([])
+    const router = useRouter();
 
     useEffect(() => {
         fetchPresbytery()
@@ -34,6 +37,13 @@ const Presbytery = () => {
             setPresbytery(data || [])
         }
     }
+
+    // Click Event
+    const hadleClick = (id: string) => {
+      //e.preventDefault()
+      router.push(`/admin/presbytery/${id}`)
+    }
+    
   return (
     <div>
         Presbytery
@@ -49,7 +59,7 @@ const Presbytery = () => {
         </TableHeader>
         <TableBody>
           {presbytery.map((singleData) => (
-            <TableRow key={singleData.id} onClick={() => { console.log(singleData.id)}}>
+            <TableRow key={singleData.id} onClick={() => {hadleClick(singleData.pres_code)}}>
               <TableCell className='font-medium'>{singleData.sl_no}</TableCell>
               <TableCell>{singleData.pres_code}</TableCell>
               <TableCell>{singleData.pres_name}</TableCell>

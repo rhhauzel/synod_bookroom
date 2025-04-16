@@ -66,11 +66,6 @@ const data = {
           title: "Presbytery",
           url: "/admin/presbytery",
         }
-        ,
-        {
-          title: "Pastor Bial",
-          url: "/admin/pastorbial",
-        }
       ],
     },
     {
