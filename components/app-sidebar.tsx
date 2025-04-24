@@ -78,6 +78,16 @@ const data = {
           url: "/admin/designation",
         },
         {
+          key: 43,
+          title:"-",
+          url:"#",
+        },
+        {
+          key: 53,
+          title: "Pay Scale",
+          url: "/admin/payscale",
+        },
+        {
           key: 41,
           title:"-",
           url:"#",

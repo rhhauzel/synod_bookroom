@@ -26,50 +26,50 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Separator } from '@/components/ui/separator'
-import { EmployeeInterface } from '@/db/interface/employee'
+import { PayScaleInterface } from '@/db/interface/payscale'
 
-const EmployeePage = () => {
+const PayScalePage = () => {
   Moment.locale('en')
 
-  const [employee, setEmployee] = useState<EmployeeInterface[]>([])
-  const [editempolyee, setEditEmployee] = useState<EmployeeInterface[]>([])
+  const [payscale, setPayScale] = useState<PayScaleInterface[]>([])
+  const [indpayscale, setIndPayScale] = useState<PayScaleInterface[]>([])
 
   useEffect(() => {
-    fetchEmployee()
+    fetchPayScale()
   }, [])
 
   // Fetch Major Head Data
-  async function fetchEmployee() {
+  async function fetchPayScale() {
     const { data, error } = await createClient()
-      .from('tm_employee')
+      .from('tm_scale')
       .select('*')
-      .order('emp_cd', { ascending: true })
+      .order('scale_cd', { ascending: true })
     if (error) {
       toast.error(`Failed to fetch data ${error.message}`)
     } else {
-      setEmployee(data || [])
+      setPayScale(data || [])
     }
   }
 
   // Individual Presbytery
-  async function getEmployee(id: string) {
+  async function getPayScale(id: string) {
     const { data, error } = await createClient()
-      .from('tm_employee')
+      .from('tm_scale')
       .select('*')
-      .eq('emp_cd', id)
+      .eq('scale_cd', id)
       .limit(1)
 
     if (error) {
       toast.error(`Failed to fetch data ${error.message}`)
     } else {
-      setEditEmployee(data || '')
+      setIndPayScale(data || '')
     }
   }
 
   return (
     <div>
       <div className='flex flex-between mb-3'>
-        <h1 className='text-3xl font-bold'>Employee</h1>
+        <h1 className='text-3xl font-bold'>Designation</h1>
         <Dialog>
           <DialogTrigger asChild>
             <Button className='text-white bg-blue-700'>Add New</Button>
@@ -113,26 +113,26 @@ const EmployeePage = () => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className='w-[100px]'>Name</TableHead>
-            <TableHead>Date of Joining</TableHead>
-            <TableHead>CPF No</TableHead>
-            <TableHead>Basic Pay</TableHead>
-            <TableHead>Designation</TableHead>
-            <TableHead>Thawhna Hmun</TableHead>
+            <TableHead className='w-[100px]'>Pay Scale Code</TableHead>
+            <TableHead>Minimum Pay</TableHead>
+            <TableHead>Mid Pay</TableHead>
+            <TableHead>Maximum Pay</TableHead>
+            <TableHead>Increment</TableHead>
+            <TableHead>EB</TableHead>
             <TableHead>Remarks</TableHead>
             <TableHead className='text-right'>Transaction Date</TableHead>
             <TableHead className='w-[100px] text-center'>Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {employee.map((singleData) => (
-            <TableRow key={singleData.emp_cd}>
-              <TableCell>{singleData.emp_name}</TableCell>
-              <TableCell>{Moment(singleData.doj_synod.toString()).format('DD-MM-YYYY')}</TableCell>
-              <TableCell>{singleData.cpf_acct_no}</TableCell>
-              <TableCell>{singleData.basic_pay}</TableCell>
-              <TableCell>{singleData.designation}</TableCell>
-              <TableCell>{singleData.thawhna_hmun}</TableCell>
+          {payscale.map((singleData) => (
+            <TableRow key={singleData.scale_cd}>
+              <TableCell>{singleData.scale_cd}</TableCell>
+              <TableCell>{singleData.minimum_pay}</TableCell>
+              <TableCell>{singleData.mid_pay}</TableCell>
+              <TableCell>{singleData.maximum_pay}</TableCell>
+              <TableCell>{singleData.incr_before_mid}</TableCell>
+              <TableCell>{singleData.eb}</TableCell>
               <TableCell>{singleData.remarks}</TableCell>
               <TableCell className='text-right'>
                 {Moment(singleData.trans_dt.toString()).format('DD-MM-YYYY')}
@@ -144,7 +144,7 @@ const EmployeePage = () => {
                       variant='outline'
                       size={'sm'}
                       className='mr-1 cursor-pointer'
-                      onClick={() => getEmployee(singleData.scale_cd)}
+                      onClick={() => getPayScale(singleData.scale_cd)}
                     >
                       <Pencil />
                     </Button>
@@ -164,7 +164,7 @@ const EmployeePage = () => {
                         </Label>
                         <Input
                           id='designation_cd'
-                          value={editempolyee[0]?.emp_name}
+                          value={indpayscale[0]?.scale_cd}
                           className='col-span-3'
                         />
                       </div>
@@ -174,7 +174,7 @@ const EmployeePage = () => {
                         </Label>
                         <Input
                           id='pres_name'
-                          value={editempolyee[0]?.designation}
+                          value={indpayscale[0]?.minimum_pay}
                           className='col-span-3'
                         />
                       </div>
@@ -184,7 +184,7 @@ const EmployeePage = () => {
                         </Label>
                         <Textarea
                           id='remarks'
-                          value={editempolyee[0]?.remarks}
+                          value={indpayscale[0]?.remarks}
                           className='col-span-3'
                         />
                       </div>
@@ -210,4 +210,4 @@ const EmployeePage = () => {
   )
 }
 
-export default EmployeePage
+export default PayScalePage
