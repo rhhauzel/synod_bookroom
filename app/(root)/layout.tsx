@@ -13,7 +13,8 @@ export default function RootLayout({
       <AppSidebar />
       <SidebarInset>
       <Header />
-      <main className='flex-1 wrapper'>{children}</main>
+      <main className='flex-1 wrapper p-4 pt-0'>
+      <div className="bg-muted/50 aspect-video rounded-xl p-5">{children}</div></main>
       <Footer />
     </SidebarInset>
     </SidebarProvider>

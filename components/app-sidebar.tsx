@@ -14,7 +14,7 @@ import {
 
 import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
-import { NavUser } from "@/components/nav-user"
+//import { NavUser } from "@/components/nav-user"
 import { TeamSwitcher } from "@/components/team-switcher"
 import {
   Sidebar,
@@ -23,14 +23,10 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { NavUser } from "./nav-user"
 
 // This is sample data.
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "",
-  },
   teams: [
     {
       name: "Acme Inc",
@@ -47,16 +43,8 @@ const data = {
       isActive: true,
       items: [
         {
-          title: "Major Head",
-          url: "/admin/majorhead",
-        },
-        {
-          title: "Minor Head",
-          url: "/admin/minorhead",
-        },
-        {
-          title: "Object Head",
-          url: "/admin/objecthead",
+          title: "Head",
+          url: "/admin/head",
         },
         {
           title:"-",
@@ -157,14 +145,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <TeamSwitcher />
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

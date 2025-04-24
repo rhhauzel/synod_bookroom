@@ -23,7 +23,7 @@ import {
 } from '@/components/ui/dialog'
 
 import { useEffect, useState } from 'react'
-import { supabase } from '@/lib/supabase'
+import { createClient } from '@/utils/supabase/client'
 import toast from 'react-hot-toast'
 import { PresbyteryInterface } from '@/db/interface/presbytery'
 
@@ -48,7 +48,7 @@ const Presbytery = () => {
 
   // Fetch Minor Head Data
   async function fetchPresbytery() {
-    const { data, error } = await supabase.from('tm_presbytery').select('*')
+    const { data, error } = await createClient().from('tm_presbytery').select('*')
 
     if (error) {
       toast.error(`Failed to fetch data ${error.message}`)
@@ -65,7 +65,7 @@ const Presbytery = () => {
 
   // Individual Presbytery
   async function getIndividualData(id: string) {
-    const { data, error } = await supabase
+    const { data, error } = await createClient()
       .from('tm_presbytery')
       .select('*')
       .eq('id', id)
@@ -84,7 +84,7 @@ const Presbytery = () => {
         <h1 className='text-3xl font-bold'>Presbytery</h1>
         <Dialog>
           <DialogTrigger asChild>
-          <Button className='text-white bg-blue-700'>Add New</Button>
+            <Button className='text-white bg-blue-700'>Add New</Button>
           </DialogTrigger>
           <DialogContent className='sm:max-w-[425px]'>
             <DialogHeader>
@@ -98,28 +98,19 @@ const Presbytery = () => {
                 <Label htmlFor='pres_code' className='text-right'>
                   Pres Code
                 </Label>
-                <Input
-                  id='pres_code'
-                  className='col-span-3'
-                />
+                <Input id='pres_code' className='col-span-3' />
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
                 <Label htmlFor='pres_name' className='text-right'>
                   Pres Name
                 </Label>
-                <Input
-                  id='pres_name'
-                  className='col-span-3'
-                />
+                <Input id='pres_name' className='col-span-3' />
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
                 <Label htmlFor='remarks' className='text-right'>
                   Remarks
                 </Label>
-                <Textarea
-                  id='remarks'
-                  className='col-span-3'
-                />
+                <Textarea id='remarks' className='col-span-3' />
               </div>
             </div>
             <DialogFooter>
@@ -127,7 +118,6 @@ const Presbytery = () => {
             </DialogFooter>
           </DialogContent>
         </Dialog>
-        
       </div>
       <Separator />
       <Table>
