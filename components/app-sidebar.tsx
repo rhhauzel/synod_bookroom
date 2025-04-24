@@ -43,16 +43,49 @@ const data = {
       isActive: true,
       items: [
         {
+          key: 1,
           title: "Head",
           url: "/admin/head",
         },
         {
+          key: 2,
           title:"-",
           url:"#",
         },
         {
+          key: 3,
+          title: "Receipt",
+          url: "/admin/receipt",
+        },
+        {
+          key: 4,
+          title:"-",
+          url:"#",
+        },
+        {
+          key: 5,
           title: "Presbytery",
           url: "/admin/presbytery",
+        },
+        {
+          key: 42,
+          title:"-",
+          url:"#",
+        },
+        {
+          key: 52,
+          title: "Designation",
+          url: "/admin/designation",
+        },
+        {
+          key: 41,
+          title:"-",
+          url:"#",
+        },
+        {
+          key: 51,
+          title: "Employee",
+          url: "/admin/employee",
         }
       ],
     },
@@ -62,14 +95,17 @@ const data = {
       icon: Bot,
       items: [
         {
+          key: 5,
           title: "Genesis",
           url: "#",
         },
         {
+          key: 6,
           title: "Explorer",
           url: "#",
         },
         {
+          key: 7,
           title: "Quantum",
           url: "#",
         },
@@ -81,18 +117,22 @@ const data = {
       icon: BookOpen,
       items: [
         {
+          key: 8,
           title: "Introduction",
           url: "#",
         },
         {
+          key: 9,
           title: "Get Started",
           url: "#",
         },
         {
+          key: 10,
           title: "Tutorials",
           url: "#",
         },
         {
+          key: 11,
           title: "Changelog",
           url: "#",
         },
@@ -104,18 +144,22 @@ const data = {
       icon: Settings2,
       items: [
         {
+          key: 12,
           title: "General",
           url: "#",
         },
         {
+          key: 13,
           title: "Team",
           url: "#",
         },
         {
+          key: 14,
           title: "Billing",
           url: "#",
         },
         {
+          key: 15,
           title: "Limits",
           url: "#",
         },

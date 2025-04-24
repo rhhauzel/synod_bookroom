@@ -11,12 +11,6 @@ export default function LoginPage() {
           </h1>
           <LoginForm />
           <div className="mt-2 flex items-center">
-            <h1>{`Don't have an account?`}</h1>
-            <Link className="font-bold ml-2" href="/register">
-              Sign Up
-            </Link>
-          </div>
-          <div className="mt-2 flex items-center">
             <h1>{`Forgot your password?`}</h1>
             <Link className="font-bold ml-2" href="/forgot-password">
               Reset Password

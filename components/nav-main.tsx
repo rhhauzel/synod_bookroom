@@ -27,6 +27,7 @@ export function NavMain({
     icon?: LucideIcon
     isActive?: boolean
     items?: {
+      key: number
       title: string
       url: string
     }[]
@@ -53,7 +54,7 @@ export function NavMain({
               <CollapsibleContent>
                 <SidebarMenuSub>
                   {item.items?.map((subItem) => (
-                    <SidebarMenuSubItem key={subItem.title}>
+                    <SidebarMenuSubItem key={subItem.key}>
                       {(subItem.title === '-' && <SidebarSeparator />) || (
                         <SidebarMenuSubButton asChild>
                           <a href={subItem.url}>
