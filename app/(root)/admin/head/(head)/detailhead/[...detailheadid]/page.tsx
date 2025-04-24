@@ -19,9 +19,10 @@ const DetailHead = ({
     
     useEffect(() => {
         fetchDetailHead()
-      }, [])
+      }, [fetchDetailHead])
 
       // Fetch Sub Head Data
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   async function fetchDetailHead() {
     const parameters = (await params).detailheadid
     const { data, error } = await createClient()

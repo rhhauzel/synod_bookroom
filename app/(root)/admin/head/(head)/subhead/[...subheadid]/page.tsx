@@ -19,9 +19,10 @@ const SubHead = ({
     
     useEffect(() => {
         fetchSubHead()
-      }, [])
+      }, [fetchSubHead])
 
       // Fetch Sub Head Data
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   async function fetchSubHead() {
     const parameters = (await params).subheadid
     const { data, error } = await createClient()

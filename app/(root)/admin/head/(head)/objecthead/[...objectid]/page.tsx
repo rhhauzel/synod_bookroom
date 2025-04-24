@@ -16,9 +16,10 @@ const ObjectHead = ({
     
     useEffect(() => {
         fetchObjectHead()
-      }, [])
+      }, [fetchObjectHead])
 
       // Fetch Sub Head Data
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   async function fetchObjectHead() {
     const parameters = (await params).objectid
     const detail_head_code = parameters[4]

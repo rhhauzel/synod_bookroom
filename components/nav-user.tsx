@@ -45,7 +45,7 @@ export function NavUser() {
     }
 
     fetchUser();
-  }, []);
+  }, [supabase.auth]);
 
   const handleLogout = async () => {
     console.log('handleLogout');

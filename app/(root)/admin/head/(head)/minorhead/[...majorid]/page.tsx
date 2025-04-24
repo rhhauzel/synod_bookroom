@@ -28,9 +28,10 @@ const MinorHead = ({
 
   useEffect(() => {
     fetchMinorHead()
-  }, [])
+  }, [fetchMinorHead])
 
   // Fetch Minor Head Data
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   async function fetchMinorHead() {
     const parameters = (await params).majorid
     const { data, error } = await createClient()
