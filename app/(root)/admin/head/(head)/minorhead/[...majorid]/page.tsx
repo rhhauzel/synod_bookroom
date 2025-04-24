@@ -15,6 +15,7 @@ import { createClient } from '@/utils/supabase/client'
 import toast from 'react-hot-toast'
 import { MinorHeadInterface } from '@/db/interface/minorhead'
 import { useRouter } from 'next/navigation'
+import Moment from 'moment'
 
 const MinorHead = ({
   params,
@@ -46,9 +47,9 @@ const MinorHead = ({
   }
 
   // Click Event
-  const hadleClick = (id: string) => {
+  const hadleClick = (fin_year: string, major_head_code: string, minor_head_code: string) => {
     //e.preventDefault()
-    router.push(`/admin/presbytery/${id}`)
+    router.push(`/admin/head/subhead/${fin_year}/${major_head_code}/${minor_head_code}`)
   }
 
   return (
@@ -67,32 +68,32 @@ const MinorHead = ({
         </TableHeader>
         <TableBody>
           {minorhead.map((singleData) => (
-            <TableRow key={singleData.id}>
+            <TableRow key={singleData.fin_year + '' + singleData.major_head_code + '' + singleData.minor_head_code }>
               <TableCell
                 className='font-medium'
                 onClick={() => {
-                  hadleClick(singleData.id)
+                  hadleClick(singleData.fin_year, singleData.major_head_code, singleData.minor_head_code)
                 }}
               >
                 {singleData.fin_year}
               </TableCell>
               <TableCell
                 onClick={() => {
-                  hadleClick(singleData.id)
+                  hadleClick(singleData.fin_year, singleData.major_head_code, singleData.minor_head_code)
                 }}
               >
                 {singleData.major_head_code}
               </TableCell>
               <TableCell
                 onClick={() => {
-                  hadleClick(singleData.id)
+                  hadleClick(singleData.fin_year, singleData.major_head_code, singleData.minor_head_code)
                 }}
               >
                 {singleData.minor_head_code}
               </TableCell>
               <TableCell
                 onClick={() => {
-                  hadleClick(singleData.id)
+                  hadleClick(singleData.fin_year, singleData.major_head_code, singleData.minor_head_code)
                 }}
               >
                 {singleData.minor_head_description}
@@ -100,10 +101,10 @@ const MinorHead = ({
               <TableCell
                 className='text-right'
                 onClick={() => {
-                  hadleClick(singleData.id)
+                  hadleClick(singleData.fin_year, singleData.major_head_code, singleData.minor_head_code)
                 }}
               >
-                {singleData.trans_dt.toString()}
+               {Moment(singleData.trans_dt.toString()).format('DD-MM-YYYY')}
               </TableCell>
             </TableRow>
           ))}

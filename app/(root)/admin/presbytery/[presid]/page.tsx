@@ -83,7 +83,7 @@ const PastorBial = ({ params }: { params: Promise<{ presid: string }> }) => {
         <TableBody>
           {pastorbial.map((singleData) => (
             <TableRow
-              key={singleData.id}
+              key={singleData.bial_code}
               onClick={() => {
                 hadleClick(singleData.pres_code, singleData.bial_code)
               }}

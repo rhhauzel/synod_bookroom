@@ -44,7 +44,7 @@ const MajorHead = () => {
   // Click Event
   const hadleClick = (fin_year: string, major_head_code: string) => {
     //e.preventDefault()
-    router.push(`/admin/head/${fin_year}/${major_head_code}`)
+    router.push(`/admin/head/minorhead/${fin_year}/${major_head_code}`)
   }
 
   return (
